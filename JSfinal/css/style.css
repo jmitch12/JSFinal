@@ -1,0 +1,206 @@
+body{
+	width: 100vw;
+	background-color: mediumaquamarine;
+	margin: none;
+}
+
+header{
+	position: relative;
+	font-family: Gotham Black, sans-serif;
+	font-weight: bolder;
+	color: white;
+	font-size: 110px;
+	width: 40vw;
+	float: right;
+	top: 24vh;
+	right: 3vw;
+
+}
+#heart{
+	position: absolute;
+	width: 20vw;
+	margin-bottom: 10vh;
+	top:45vh;
+	left: 36vh;
+}
+#heart #heart2{
+	width: 70%;
+}
+#man{
+	position: absolute;
+	width: 40vw;
+	left:8vw;
+	top: 8vh;
+	z-index: -1;
+}
+#man img{
+	width: 95%;
+	opacity: 0.8;
+}
+#description{
+	position: absolute;
+	width: 35vw;
+	left: 16vw;
+	top:28vh;
+	font-family: Gotham Black, sans-serif;
+	color: white;
+	margin-bottom: 18vh;
+	display: none;
+}
+#description p{
+	font-size: 25px;
+}
+#structure{
+	position: absolute;
+	width: 60vw;
+	left: 30vw;
+	top:110vh;
+	font-family: Gotham Black, sans-serif;
+	color: white;
+	text-align: right;
+
+}
+#structure p{
+	font-size: 25px;
+}
+#chambers{
+	position: absolute;
+	width: 100vw;
+	left:30vw;
+	top: 160vh;
+	z-index: -1;
+}
+#vena{
+	position: absolute;
+	width: 100vw;
+	left:15vw;
+	top: 148vh;
+	z-index: -1;
+}
+#auricle{
+	position: absolute;
+	width: 100vw;
+	left:18vw;
+	top: 170vh;
+	z-index: -1;
+}
+#aorta{
+	position: absolute;
+	width: 100vw;
+	left:49vw;
+	top: 151vh;
+	z-index: -1;
+}
+#pulmonary{
+	position: absolute;
+	width: 100vw;
+	left:7vw;
+	top: 190vh;
+	z-index: -1;
+}
+#inferior{
+	position: absolute;
+	width: 100vw;
+	left:23vw;
+	top: 230vh;
+	z-index: -1;
+}
+#left{
+	position: absolute;
+	width: 100vw;
+	left:66vw;
+	top: 187vh;
+	z-index: -1;
+}
+#artery{
+	position: absolute;
+	width: 100vw;
+	left:63vw;
+	top: 163vh;
+	z-index: -1;
+}
+#lauricle{
+	position: absolute;
+	width: 100vw;
+	left:58vw;
+	top: 175vh;
+	z-index: -1;
+}
+#ratrium{
+	position: absolute;
+	width: 100vw;
+	left:43vw;
+	top: 190vh;
+	z-index: 99;
+}
+#latrium{
+	position: absolute;
+	width: 100vw;
+	left:53vw;
+	top: 190vh;
+	z-index: 99;
+}
+#rventricle{
+	position: absolute;
+	width: 100vw;
+	left:40vw;
+	top: 203vh;
+	z-index: 99;
+}
+#lventricle{
+	position: absolute;
+	width: 100vw;
+	left:53vw;
+	top: 203vh;
+	z-index: 99;
+}
+#circulatory{
+	position: absolute;
+	width: 65vw;
+	left: 25vw;
+	top:255vh;
+	font-family: Gotham Black, sans-serif;
+	color: white;
+	text-align: right;
+
+}
+#circulatory p{
+	font-size: 25px;
+}
+#circulate{
+	position: absolute;
+	width: 100vw;
+	left:-15vw;
+	top: 295vh;
+	z-index: -1;
+}
+#circulation{
+	position: absolute;
+	width: 65vw;
+	left: 11vw;
+	top:456vh;
+	font-family: Gotham Black, sans-serif;
+	color: white;
+	text-align: left;
+
+}
+#circulation p{
+	font-size: 25px;
+}
+#chambers2{
+	position: absolute;
+	width: 100vw;
+	left:30vw;
+	top: 500vh;
+	z-index: -1;
+}
+#arrows{
+	position: absolute;
+	width: 100vw;
+	left:20vw;
+	top: 495vh;
+	z-index: -1;
+}
+#arrows #arrow{
+	width:60%;
+}
