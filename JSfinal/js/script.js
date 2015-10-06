@@ -5,7 +5,7 @@ var man = $('#man');
 var description = $('#description');
 var audioElement = document.createElement('audio');
 audioElement.setAttribute('src', 'audio/audio.mp3');
-var chambers = $('#chambers');
+var circulate = $('#circulate');
 
 $(heart2).click(function(){
 	$(heart2).animate({ 
@@ -22,6 +22,11 @@ $(heart2).click(function(){
 	audioElement.play();
 
 });
+
+
+    $(circulate).addClass('animated fadeIn');
+
+
 
 // new Vivus('arrow', {
 //     type: 'delayed',

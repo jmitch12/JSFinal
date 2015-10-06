@@ -173,6 +173,8 @@ header{
 	left:-15vw;
 	top: 295vh;
 	z-index: -1;
+	-webkit-animation-duration: 3s;
+  	-webkit-animation-delay: 2s;
 }
 #circulation{
 	position: absolute;
