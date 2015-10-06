@@ -1,4 +1,256 @@
+/**
+ * vivus - JavaScript library to make drawing animation on SVG
+ * @version v0.2.2
+ * @link https://github.com/maxwellito/vivus
+ * @license MIT
+ */
+
 'use strict';
+
+(function (window, document) {
+
+  'use strict';
+
+/**
+ * Pathformer
+ * Beta version
+ *
+ * Take any SVG version 1.1 and transform
+ * child elements to 'path' elements
+ *
+ * This code is purely forked from
+ * https://github.com/Waest/SVGPathConverter
+ */
+
+/**
+ * Class constructor
+ *
+ * @param {DOM|String} element Dom element of the SVG or id of it
+ */
+function Pathformer(element) {
+  // Test params
+  if (typeof element === 'undefined') {
+    throw new Error('Pathformer [constructor]: "element" parameter is required');
+  }
+
+  // Set the element
+  if (element.constructor === String) {
+    element = document.getElementById(element);
+    if (!element) {
+      throw new Error('Pathformer [constructor]: "element" parameter is not related to an existing ID');
+    }
+  }
+  if (element.constructor instanceof window.SVGElement || /^svg$/i.test(element.nodeName)) {
+    this.el = element;
+  } else {
+    throw new Error('Pathformer [constructor]: "element" parameter must be a string or a SVGelement');
+  }
+
+  // Start
+  this.scan(element);
+}
+
+/**
+ * List of tags which can be transformed
+ * to path elements
+ *
+ * @type {Array}
+ */
+Pathformer.prototype.TYPES = ['line', 'elipse', 'circle', 'polygon', 'polyline', 'rect'];
+
+/**
+ * List of attribute names which contain
+ * data. This array list them to check if
+ * they contain bad values, like percentage. 
+ *
+ * @type {Array}
+ */
+Pathformer.prototype.ATTR_WATCH = ['cx', 'cy', 'points', 'r', 'rx', 'ry', 'x', 'x1', 'x2', 'y', 'y1', 'y2'];
+
+/**
+ * Finds the elements compatible for transform
+ * and apply the liked method
+ *
+ * @param  {object} options Object from the constructor
+ */
+Pathformer.prototype.scan = function (svg) {
+  var fn, element, pathData, pathDom,
+    elements = svg.querySelectorAll(this.TYPES.join(','));
+  for (var i = 0; i < elements.length; i++) {
+    element = elements[i];
+    fn = this[element.tagName.toLowerCase() + 'ToPath'];
+    pathData = fn(this.parseAttr(element.attributes));
+    pathDom = this.pathMaker(element, pathData);
+    element.parentNode.replaceChild(pathDom, element);
+  }
+};
+
+
+/**
+ * Read `line` element to extract and transform
+ * data, to make it ready for a `path` object.
+ *
+ * @param  {DOMelement} element Line element to transform
+ * @return {object}             Data for a `path` element
+ */
+Pathformer.prototype.lineToPath = function (element) {
+  var newElement = {};
+  newElement.d = 'M' + element.x1 + ',' + element.y1 + 'L' + element.x2 + ',' + element.y2;
+  return newElement;
+};
+
+/**
+ * Read `rect` element to extract and transform
+ * data, to make it ready for a `path` object.
+ * The radius-border is not taken in charge yet.
+ * (your help is more than welcomed)
+ *
+ * @param  {DOMelement} element Rect element to transform
+ * @return {object}             Data for a `path` element
+ */
+Pathformer.prototype.rectToPath = function (element) {
+  var newElement = {},
+    x = parseFloat(element.x) || 0,
+    y = parseFloat(element.y) || 0,
+    width = parseFloat(element.width) || 0,
+    height = parseFloat(element.height) || 0;
+  newElement.d  = 'M' + x + ' ' + y + ' ';
+  newElement.d += 'L' + (x + width) + ' ' + y + ' ';
+  newElement.d += 'L' + (x + width) + ' ' + (y + height) + ' ';
+  newElement.d += 'L' + x + ' ' + (y + height) + ' Z';
+  return newElement;
+};
+
+/**
+ * Read `polyline` element to extract and transform
+ * data, to make it ready for a `path` object.
+ *
+ * @param  {DOMelement} element Polyline element to transform
+ * @return {object}             Data for a `path` element
+ */
+Pathformer.prototype.polylineToPath = function (element) {
+  var i, path;
+  var newElement = {};
+  var points = element.points.split(' ');
+  
+  // Reformatting if points are defined without commas
+  if (element.points.indexOf(',') === -1) {
+    var formattedPoints = [];
+    for (i = 0; i < points.length; i+=2) {
+      formattedPoints.push(points[i] + ',' + points[i+1]);
+    }
+    points = formattedPoints;
+  }
+
+  // Generate the path.d value
+  path = 'M' + points[0];
+  for(i = 1; i < points.length; i++) {
+    if (points[i].indexOf(',') !== -1) {
+      path += 'L' + points[i];
+    }
+  }
+  newElement.d = path;
+  return newElement;
+};
+
+/**
+ * Read `polygon` element to extract and transform
+ * data, to make it ready for a `path` object.
+ * This method rely on polylineToPath, because the
+ * logic is similar. The path created is just closed,
+ * so it needs an 'Z' at the end.
+ *
+ * @param  {DOMelement} element Polygon element to transform
+ * @return {object}             Data for a `path` element
+ */
+Pathformer.prototype.polygonToPath = function (element) {
+  var newElement = Pathformer.prototype.polylineToPath(element);
+  newElement.d += 'Z';
+  return newElement;
+};
+
+/**
+ * Read `elipse` element to extract and transform
+ * data, to make it ready for a `path` object.
+ *
+ * @param  {DOMelement} element Elipse element to transform
+ * @return {object}             Data for a `path` element
+ */
+Pathformer.prototype.elipseToPath = function (element) {
+  var startX = element.cx - element.rx,
+      startY = element.cy;
+  var endX = parseFloat(element.cx) + parseFloat(element.rx),
+      endY = element.cy;
+
+  var newElement = {};
+  newElement.d = 'M' + startX + ',' + startY +
+                 'A' + element.rx + ',' + element.ry + ' 0,1,1 ' + endX + ',' + endY +
+                 'A' + element.rx + ',' + element.ry + ' 0,1,1 ' + startX + ',' + endY;
+  return newElement;
+};
+
+/**
+ * Read `circle` element to extract and transform
+ * data, to make it ready for a `path` object.
+ *
+ * @param  {DOMelement} element Circle element to transform
+ * @return {object}             Data for a `path` element
+ */
+Pathformer.prototype.circleToPath = function (element) {
+  var newElement = {};
+  var startX = element.cx - element.r,
+      startY = element.cy;
+  var endX = parseFloat(element.cx) + parseFloat(element.r),
+      endY = element.cy;
+  newElement.d =  'M' + startX + ',' + startY +
+                  'A' + element.r + ',' + element.r + ' 0,1,1 ' + endX + ',' + endY +
+                  'A' + element.r + ',' + element.r + ' 0,1,1 ' + startX + ',' + endY;
+  return newElement;
+};
+
+/**
+ * Create `path` elements form original element
+ * and prepared objects
+ *
+ * @param  {DOMelement} element  Original element to transform
+ * @param  {object} pathData     Path data (from `toPath` methods)
+ * @return {DOMelement}          Path element
+ */
+Pathformer.prototype.pathMaker = function (element, pathData) {
+  var i, attr, pathTag = document.createElementNS('http://www.w3.org/2000/svg','path');
+  for(i = 0; i < element.attributes.length; i++) {
+    attr = element.attributes[i];
+    if (this.ATTR_WATCH.indexOf(attr.name) === -1) {
+      pathTag.setAttribute(attr.name, attr.value);
+    }
+  }
+  for(i in pathData) {
+    pathTag.setAttribute(i, pathData[i]);
+  }
+  return pathTag;
+};
+
+/**
+ * Parse attributes of a DOM element to
+ * get an object of attribute => value
+ *
+ * @param  {NamedNodeMap} attributes Attributes object from DOM element to parse
+ * @return {object}                  Object of attributes
+ */
+Pathformer.prototype.parseAttr = function (element) {
+  var attr, output = {};
+  for (var i = 0; i < element.length; i++) {
+    attr = element[i];
+    // Check if no data attribute contains '%', or the transformation is impossible
+    if (this.ATTR_WATCH.indexOf(attr.name) !== -1 && attr.value.indexOf('%') !== -1) {
+      throw new Error('Pathformer [parseAttr]: a SVG shape got values in percentage. This cannot be transformed into \'path\' tags. Please use \'viewBox\'.');
+    }
+    output[attr.name] = attr.value;
+  }
+  return output;
+};
+
+  'use strict';
 
 var requestAnimFrame, cancelAnimFrame, parsePositiveInt;
 
@@ -116,8 +368,6 @@ Vivus.prototype.setElement = function (element, options) {
     var objElm = document.createElement('object');
     objElm.setAttribute('type', 'image/svg+xml');
     objElm.setAttribute('data', options.file);
-    objElm.setAttribute('width', '100%');
-    objElm.setAttribute('height', '100%');
     element.appendChild(objElm);
     element = objElm;
   }
@@ -191,15 +441,13 @@ Vivus.prototype.setOptions = function (options) {
     this.start = options.start || allowedStarts[0];
   }
 
-  this.isIE        = (window.navigator.userAgent.indexOf('MSIE') !== -1 || window.navigator.userAgent.indexOf('Trident/') !== -1 || window.navigator.userAgent.indexOf('Edge/') !== -1 );
+  this.isIE        = (window.navigator.userAgent.indexOf('MSIE') !== -1);
   this.duration    = parsePositiveInt(options.duration, 120);
   this.delay       = parsePositiveInt(options.delay, null);
   this.dashGap     = parsePositiveInt(options.dashGap, 2);
   this.forceRender = options.hasOwnProperty('forceRender') ? !!options.forceRender : this.isIE;
   this.selfDestroy = !!options.selfDestroy;
   this.onReady     = options.onReady;
-
-  this.ignoreInvisible = options.hasOwnProperty('ignoreInvisible') ? !!options.ignoreInvisible : false;
 
   this.animTimingFunction = options.animTimingFunction || Vivus.LINEAR;
   this.pathTimingFunction = options.pathTimingFunction || Vivus.LINEAR;
@@ -257,9 +505,6 @@ Vivus.prototype.mapping = function () {
 
   for (i = 0; i < paths.length; i++) {
     path = paths[i];
-    if (this.isInvisible(path)) {
-      continue;
-    }
     pathObj = {
       el: path,
       length: Math.ceil(path.getTotalLength())
@@ -487,6 +732,12 @@ Vivus.prototype.getStatus = function () {
   return this.currentFrame === 0 ? 'start' : this.currentFrame === this.frameLength ? 'end' : 'progress';
 };
 
+
+/**
+ * Controls
+ **************************************
+ */
+
 /**
  * Reset the instance to the initial state : undraw
  * Be careful, it just reset the animation, if you're
@@ -576,40 +827,9 @@ Vivus.prototype.destroy = function () {
 
 /**
  * Utils methods
- * include methods from Codrops
+ * from Codrops
  **************************************
  */
-
-/**
- * Method to best guess if a path should added into
- * the animation or not.
- *
- * 1. Use the `data-vivus-ignore` attribute if set
- * 2. Check if the instance must ignore invisible paths
- * 3. Check if the path is visible
- *
- * For now the visibility checking is unstable.
- * It will be used for a beta phase.
- *
- * Other improvments are planned. Like detecting
- * is the path got a stroke or a valid opacity.
- */
-Vivus.prototype.isInvisible = function (el) {
-  var rect,
-    ignoreAttr = el.getAttribute('data-ignore');
-
-  if (ignoreAttr !== null) {
-    return ignoreAttr !== 'false';
-  }
-
-  if (this.ignoreInvisible) {
-    rect = el.getBoundingClientRect();
-    return !rect.width && !rect.height;
-  }
-  else {
-    return false;
-  }
-};
 
 /**
  * Parse attributes of a DOM element to
@@ -736,3 +956,21 @@ parsePositiveInt = function (value, defaultValue) {
   var output = parseInt(value, 10);
   return (output >= 0) ? output : defaultValue;
 };
+
+
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define([], function() {
+      return Vivus;
+    });
+  } else if (typeof exports === 'object') {
+    // Node. Does not work with strict CommonJS, but
+    // only CommonJS-like environments that support module.exports,
+    // like Node.
+    module.exports = Vivus;
+  } else {
+    // Browser globals
+    window.Vivus = Vivus;
+  }
+
+}(window, document));

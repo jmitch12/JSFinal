@@ -196,11 +196,62 @@ header{
 }
 #arrows{
 	position: absolute;
-	width: 100vw;
-	left:20vw;
-	top: 495vh;
+	width: 48vw;
+	left:27vw;
+	top: 483vh;
 	z-index: -1;
 }
-#arrows #arrow{
-	width:60%;
+#fromlungs{
+	position: absolute;
+	width: 40vw;
+	left:7.5vw;
+	top: 531.5vh;
+}
+#frombody{
+	position: absolute;
+	width: 40vw;
+	left:19vw;
+	top: 502vh;
+}
+#frombody2{
+	position: absolute;
+	width: 40vw;
+	left:22vw;
+	top: 570vh;
+}
+#rightatov{
+	position: absolute;
+	width: 40vw;
+	left:18vw;
+	top: 547vh;
+}
+#aortablood{
+	position: absolute;
+	width: 40vw;
+	left:20vw;
+	top: 515vh;
+}
+#tolungs{
+	position: absolute;
+	width: 40vw;
+	left:67vw;
+	top: 508.5vh;
+}
+#fromlungs2{
+	position: absolute;
+	width: 40vw;
+	left:70.5vw;
+	top: 528vh;
+}
+#leftatov{
+	position: absolute;
+	width: 40vw;
+	left:56vw;
+	top: 547vh;
+}
+#bloodtobody{
+	position: absolute;
+	width: 40vw;
+	left:56vw;
+	top: 576vh;
 }

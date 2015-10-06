@@ -23,8 +23,8 @@ $(heart2).click(function(){
 
 });
 
-new Vivus('arrow', {
-    type: 'delayed',
-    duration: 200,
-    animTimingFunction: Vivus.EASE
-}, myCallback);
+// new Vivus('arrow', {
+//     type: 'delayed',
+//     duration: 200,
+//     animTimingFunction: Vivus.EASE
+// }, myCallback);
