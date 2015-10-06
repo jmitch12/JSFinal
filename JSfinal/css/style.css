@@ -265,7 +265,7 @@ header{
 }
 #conclusion{
 	position: absolute;
-	width: 65vw;
+	width: 78vw;
 	left: 10vw;
 	top:600vh;
 	font-family: Gotham Black, sans-serif;
@@ -273,13 +273,104 @@ header{
 	text-align: left;
 
 }
-#conclusion p{
+#conclusion ul{
 	font-size: 25px;
 }
+#conclusion ul li{
+	padding-bottom: 10px;
+}
+
+#articles{
+	position: absolute;
+	width: 78vw;
+	left: 12vw;
+	top:665vh;
+	font-family: Gotham Black, sans-serif;
+	color: white;
+	text-align: right;
+}
+#nytimes{
+	position: absolute;
+	width: 60vw;
+	left: 30vw;
+	top:678vh;
+	font-family: Gotham Black, sans-serif;
+	font-size: 25px;
+	color: white;
+	text-align: right;
+}
+/*#nytimes:hover{
+	opacity: .5;
+}*/
+#nytimes a{
+	text-decoration: none;
+	color:white;
+}
+#nytimes a:hover{
+	color:coral;
+}
+#nytimes2{
+	position: absolute;
+	width: 60vw;
+	left: 30vw;
+	top:705vh;
+	font-family: Gotham Black, sans-serif;
+	font-size: 25px;
+	color: white;
+	text-align: right;
+}
+/*#nytimes2:hover{
+	opacity: .5;
+}*/
+#nytimes2 a{
+	text-decoration: none;
+	color:white;
+}
+#nytimes2 a:hover{
+	color:salmon;
+}
+#timeslogo{
+	position: absolute;
+	top: 678vh;
+	left: 10vw;
+}
+#timeslogo img{
+	width: 100%;
+}
+#timeslogo a:hover{
+	opacity: .5;
+}
+
+#instagram{
+	position: absolute;
+	width: 78vw;
+	left: 10vw;
+	top:724vh;
+	font-family: Gotham Black, sans-serif;
+	color: white;
+	text-align: left;
+}
+
 #instafeed{
 	position: absolute;
 	width: 85vw;
 	left: 9vw;
-	top:620vh;
+	top:740vh;
 
+}
+button{
+	position: absolute;
+	width: 30vw;
+	height: 10vh;
+	left: 35vw;
+	top:840vh;
+	font-family: Gotham Black, sans-serif;
+	color: mediumaquamarine;
+	font-size: 25px;
+	background-color: white;
+	margin-bottom: 10vh;
+}
+button:hover{
+	opacity: .8;
+	background-color: salmon;
 }
