@@ -26,6 +26,9 @@ header{
 #heart #heart2{
 	width: 70%;
 }
+#heart2:hover{
+	opacity: .5;
+}
 #man{
 	position: absolute;
 	width: 40vw;
@@ -65,91 +68,91 @@ header{
 }
 #chambers{
 	position: absolute;
-	width: 100vw;
+	width: 50vw;
 	left:30vw;
 	top: 160vh;
 	z-index: -1;
 }
 #vena{
 	position: absolute;
-	width: 100vw;
+	width: 40vw;
 	left:15vw;
 	top: 148vh;
 	z-index: -1;
 }
 #auricle{
 	position: absolute;
-	width: 100vw;
+	width: 40vw;
 	left:18vw;
 	top: 170vh;
 	z-index: -1;
 }
 #aorta{
 	position: absolute;
-	width: 100vw;
+	width: 40vw;
 	left:49vw;
 	top: 151vh;
 	z-index: -1;
 }
 #pulmonary{
 	position: absolute;
-	width: 100vw;
+	width: 40vw;
 	left:7vw;
 	top: 190vh;
 	z-index: -1;
 }
 #inferior{
 	position: absolute;
-	width: 100vw;
+	width: 40vw;
 	left:23vw;
 	top: 230vh;
 	z-index: -1;
 }
 #left{
 	position: absolute;
-	width: 100vw;
+	width: 20vw;
 	left:66vw;
 	top: 187vh;
 	z-index: -1;
 }
 #artery{
 	position: absolute;
-	width: 100vw;
+	width: 30vw;
 	left:63vw;
 	top: 163vh;
 	z-index: -1;
 }
 #lauricle{
 	position: absolute;
-	width: 100vw;
+	width: 40vw;
 	left:58vw;
 	top: 175vh;
 	z-index: -1;
 }
 #ratrium{
 	position: absolute;
-	width: 100vw;
+	width: 40vw;
 	left:43vw;
 	top: 190vh;
 	z-index: 99;
 }
 #latrium{
 	position: absolute;
-	width: 100vw;
+	width: 40vw;
 	left:53vw;
 	top: 190vh;
 	z-index: 99;
 }
 #rventricle{
 	position: absolute;
-	width: 100vw;
+	width: 40vw;
 	left:40vw;
 	top: 203vh;
 	z-index: 99;
 }
 #lventricle{
 	position: absolute;
-	width: 100vw;
+	width: 40vw;
 	left:53vw;
 	top: 203vh;
 	z-index: 99;
@@ -169,16 +172,19 @@ header{
 }
 #circulate{
 	position: absolute;
-	width: 100vw;
+	width: 115vw;
 	left:-15vw;
 	top: 295vh;
+	padding-bottom: 20px;
+	padding-top: 25px;
+	overflow: hidden;
 	z-index: -1;
 	-webkit-animation-duration: 3s;
-  	-webkit-animation-delay: 2s;
+  	/*-webkit-animation-delay: 1s;*/
 }
 #circulation{
 	position: absolute;
-	width: 65vw;
+	width: 75vw;
 	left: 11vw;
 	top:456vh;
 	font-family: Gotham Black, sans-serif;
@@ -191,7 +197,7 @@ header{
 }
 #chambers2{
 	position: absolute;
-	width: 100vw;
+	width: 50vw;
 	left:30vw;
 	top: 500vh;
 	z-index: -1;
@@ -205,55 +211,75 @@ header{
 }
 #fromlungs{
 	position: absolute;
-	width: 40vw;
+	width: 30vw;
 	left:7.5vw;
 	top: 531.5vh;
 }
 #frombody{
 	position: absolute;
-	width: 40vw;
+	width: 30vw;
 	left:19vw;
 	top: 502vh;
 }
 #frombody2{
 	position: absolute;
-	width: 40vw;
+	width: 30vw;
 	left:22vw;
 	top: 570vh;
 }
 #rightatov{
 	position: absolute;
-	width: 40vw;
+	width: 30vw;
 	left:18vw;
 	top: 547vh;
 }
 #aortablood{
 	position: absolute;
-	width: 40vw;
+	width: 30vw;
 	left:20vw;
 	top: 515vh;
 }
 #tolungs{
 	position: absolute;
-	width: 40vw;
+	width: 30vw;
 	left:67vw;
 	top: 508.5vh;
 }
 #fromlungs2{
 	position: absolute;
-	width: 40vw;
+	width: 25vw;
 	left:70.5vw;
 	top: 528vh;
 }
 #leftatov{
 	position: absolute;
-	width: 40vw;
+	width: 30vw;
 	left:56vw;
 	top: 547vh;
 }
 #bloodtobody{
 	position: absolute;
-	width: 40vw;
+	width: 30vw;
 	left:56vw;
 	top: 576vh;
+}
+#conclusion{
+	position: absolute;
+	width: 65vw;
+	left: 10vw;
+	top:600vh;
+	font-family: Gotham Black, sans-serif;
+	color: white;
+	text-align: left;
+
+}
+#conclusion p{
+	font-size: 25px;
+}
+#instafeed{
+	position: absolute;
+	width: 85vw;
+	left: 9vw;
+	top:620vh;
+
 }

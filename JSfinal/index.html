@@ -65,19 +65,18 @@
 		<p data-sr>The circulatory system is a vast network of organs and vessels that is responsible for the flow of blood, nutrients, hormones, oxygen and other gases to and from cells.The heart, blood, and blood vessels make up the cardiovascular component of the circulatory system.</p>
 	</div>
 	<div id="circulate">
-		<img class="animated infinite pulse"  src="image/circulate.png">
+		<img class="animated infinite pulse" src="image/circulate.png">
 	</div> 
-		<div id="circulation">
+	<div id="circulation">
 		<h1 data-sr>CIRCULATION OF BLOOD</h1>
-		<p data-sr>Veins carry blood to the heart and arteries carry blood away from the heart to the rest of the body. The right heart pumps deoxygenated blood to the lungs. The lungs return oxygenated blood to the left heart. After arriving at the left heart the blood travels through the aorta to the rest of the body.</p>
+		<p data-sr>The heart circulates blood through two pathways: the pulmonary circuit and the systemic circuit. Veins carry blood to the heart and arteries carry blood away from the heart to the rest of the body. The right heart pumps deoxygenated blood to the lungs. The lungs return oxygenated blood to the left heart. After arriving at the left heart the blood travels through the aorta to the rest of the body.</p>
 	</div>
 	<div id="chambers2">
 		<img class="animated infinite pulse" data-sr src="image/chambers2.png">
 	</div> 
 
-
 	<div id="arrows">
-	<!-- arrows -->	
+	<!-- arrows SVG loaded -->	
 <?xml version="1.0" encoding="utf-8"?>
 <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 612 792" enable-background="new 0 0 612 792" xml:space="preserve">
@@ -125,19 +124,30 @@
 		<img data-sr src="image/aortablood2.png">
 	</div> 
 
+	<div id="conclusion">
+		<h1 data-sr>INSTAHEART</h1>
+		<p data-sr>#humanheart</p>
+	</div>
+
+
+
+
+	<div data-sr id="instafeed"></div>
+
 
 	<script src="js/jquery-2.1.4.min.js"></script>
 	<script src="js/scrollReveal.min.js"></script>
 	<script src="js/script.js"></script>
 
 	<script src="js/vivus.js"></script>
-<script>
 
+<script>
+//SVG animation
 var illustration = new Vivus('Layer_1', {
-							  type: 'delayed', 
-							  duration: 100, 
+							  type: 'async', 
+							  // duration: 100, 
 							  start: 'inViewport', 
-							  dashGap: 20, 
+							  // dashGap: 20, 
 							  forceRender: false},
 				function () {
 					if (window.console) {
@@ -145,6 +155,20 @@ var illustration = new Vivus('Layer_1', {
 					};
 					
 				});
+</script>
+
+<script src="js/instafeed.min.js"></script>
+
+<script>
+
+var feed = new Instafeed({
+        get: 'tagged',
+        tagName: 'humanheart',
+        limit: '28',
+        clientId: 'bc2fe5119dc94167b4b3fb33ee7fbe55'
+    });
+    feed.run();
+
 </script>
 
 </body>
